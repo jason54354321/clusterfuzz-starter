@@ -27,4 +27,21 @@ RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
 
 ENV PATH="${PATH}:/usr/local/go/bin"
 
+# clone clusterfuzz
+RUN apt install git -y \
+	&& apt install sudo -y
+
+WORKDIR '/root/dev'
+
+RUN git clone https://github.com/google/clusterfuzz
+
+WORKDIR '/root/dev/clusterfuzz'
+
+RUN git checkout tags/v2.6.0
+
+RUN local/install_deps.bash
+
+RUN echo "export SHELL=/bin/bash" >> /root/.bashrc
+
+
 CMD [ "bash" ]
