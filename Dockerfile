@@ -10,8 +10,9 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
 
 RUN tar -xf google-cloud-cli-444.0.0-linux-x86_64.tar.gz  -C /usr/opt/
 
-RUN /usr/opt/google-cloud-sdk/install.sh
+RUN /usr/opt/google-cloud-sdk/install.sh --quiet --rc-path /root/.bashrc
 
+RUN bash
 
 
 CMD [ "bash" ]
